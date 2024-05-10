@@ -280,28 +280,15 @@ void changeFaceContour(int contour) {
                 glVertex2f(0.2, -0.4);
                 glVertex2f(0.4, 0.0);
             glEnd();
+            break;
         case 6:
-            // Contorno facial tipo 6: Linhas verticais
+            // Contorno facial tipo 6: Losango
             glLineWidth(2.0); // Define a largura da linha
-            glBegin(GL_LINES); // Desenha linhas
-                glVertex2f(-0.4, 0.4);
-                glVertex2f(-0.4, -0.4);
-                glVertex2f(-0.3, 0.4);
-                glVertex2f(-0.3, -0.4);
-                glVertex2f(-0.2, 0.4);
-                glVertex2f(-0.2, -0.4);
-                glVertex2f(-0.1, 0.4);
-                glVertex2f(-0.1, -0.4);
+            glBegin(GL_LINE_LOOP); // Desenha um contorno fechado (polígono)
                 glVertex2f(0.0, 0.4);
+                glVertex2f(-0.4, 0.0);
                 glVertex2f(0.0, -0.4);
-                glVertex2f(0.1, 0.4);
-                glVertex2f(0.1, -0.4);
-                glVertex2f(0.2, 0.4);
-                glVertex2f(0.2, -0.4);
-                glVertex2f(0.3, 0.4);
-                glVertex2f(0.3, -0.4);
-                glVertex2f(0.4, 0.4);
-                glVertex2f(0.4, -0.4);
+                glVertex2f(0.4, 0.0);
             glEnd();
             break;
     }
@@ -463,40 +450,39 @@ void changeHair(int hairstyle) {
             glEnd();
             break;
         case 6:
-            // Cabelo tipo 6: Linhas diagonais e verticais
+            // Cabelo tipo 6: bolinhas
             glColor3ub(0, 0, 0); // Cor preta
-            glLineWidth(2.0); // Largura da linha
-            glBegin(GL_LINES);
-                glVertex2f(-0.3, 0.4); // Mais próximo do contorno facial
-                glVertex2f(-0.2, 0.3);
-                glVertex2f(-0.25, 0.4);
-                glVertex2f(-0.15, 0.3);
-                glVertex2f(-0.2, 0.4);
-                glVertex2f(-0.1, 0.3);
-                glVertex2f(-0.15, 0.4);
-                glVertex2f(-0.05, 0.3);
-                glVertex2f(-0.1, 0.4);
-                glVertex2f(0.0, 0.3);
-                glVertex2f(-0.05, 0.4);
-                glVertex2f(0.05, 0.3);
-                glVertex2f(0.0, 0.4);
-                glVertex2f(0.1, 0.3);
-                glVertex2f(0.05, 0.4);
-                glVertex2f(0.15, 0.3);
-                glVertex2f(0.1, 0.4);
-                glVertex2f(0.2, 0.3);
-                glVertex2f(0.15, 0.4);
-                glVertex2f(0.25, 0.3);
-                glVertex2f(0.2, 0.4);
-                glVertex2f(0.3, 0.3);
-                glVertex2f(0.25, 0.4);
-                glVertex2f(0.3, 0.4);
+            glBegin(GL_POLYGON);
+                for (int i = 0; i < 360; ++i) {
+                    float theta = i * 3.14159265359 / 180.0;
+                    float x = -0.3 + 0.1 * cos(theta);
+                    float y = 0.4 + 0.1 * sin(theta);
+                    glVertex2f(x, y);
+                }
             glEnd();
-            glBegin(GL_LINES);
-                glVertex2f(-0.3, 0.35); // Mais próximo do contorno facial
-                glVertex2f(0.3, 0.35);
-                glVertex2f(-0.3, 0.3);
-                glVertex2f(0.3, 0.3);
+            glBegin(GL_POLYGON);
+                for (int i = 0; i < 360; ++i) {
+                    float theta = i * 3.14159265359 / 180.0;
+                    float x = -0.1 + 0.1 * cos(theta);
+                    float y = 0.4 + 0.1 * sin(theta);
+                    glVertex2f(x, y);
+                }
+            glEnd();
+            glBegin(GL_POLYGON);
+                for (int i = 0; i < 360; ++i) {
+                    float theta = i * 3.14159265359 / 180.0;
+                    float x = 0.1 + 0.1 * cos(theta);
+                    float y = 0.4 + 0.1 * sin(theta);
+                    glVertex2f(x, y);
+                }
+            glEnd();
+            glBegin(GL_POLYGON);
+                for (int i = 0; i < 360; ++i) {
+                    float theta = i * 3.14159265359 / 180.0;
+                    float x = 0.3 + 0.1 * cos(theta);
+                    float y = 0.4 + 0.1 * sin(theta);
+                    glVertex2f(x, y);
+                }
             glEnd();
             break;
     }
@@ -599,66 +585,48 @@ void changeMouth(int mouthShape) {
             glEnd();
             break;
         case 2:
-            // Desenho da boca tipo 2 corpo do rosto
-            glColor3ub(0, 255, 0); // Cor verde
-            glBegin(GL_POLYGON);
-                glVertex2f(-0.2, -0.4);
-                glVertex2f(0.2, -0.4);
-                glVertex2f(0.2, -0.2);
+            // Desenho da boca tipo 2 (linha curva)
+            glColor3ub(255, 0, 0); // Cor vermelha
+            glBegin(GL_LINE_STRIP);
                 glVertex2f(-0.2, -0.2);
+                glVertex2f(-0.1, -0.25);
+                glVertex2f(0.1, -0.25);
+                glVertex2f(0.2, -0.2);
             glEnd();
             break;
         case 3:
-            // Desenho da boca tipo 3 (forma arredondada)
-            glColor3ub(0, 0, 255); // Cor azul
-            glBegin(GL_POLYGON);
-                for (int i = 0; i < 180; ++i) {
-                    float theta = i * 2.0 * 3.14159265359 / 180.0;
-                    float x = 0.2 * cos(theta);
-                    float y = -0.3 + 0.1 * sin(theta);
-                    glVertex2f(x, y);
-                }
+            // Desenho da boca tipo 3 (triângulo)
+            glColor3ub(255, 0, 0); // Cor vermelha
+            glBegin(GL_TRIANGLES);
+                glVertex2f(-0.2, -0.2);
+                glVertex2f(0.2, -0.2);
+                glVertex2f(0.0, -0.3);
             glEnd();
             break;
         case 4:
-            // Desenho da boca tipo coração
-            glColor3ub(255, 255, 0); // Cor amarela
+            // Desenho da boca tipo 4 (retângulo)
+            glColor3ub(255, 0, 0); // Cor vermelha
             glBegin(GL_POLYGON);
-                for (int i = 0; i < 180; ++i) {
-                    float theta = i * 2.0 * 3.14159265359 / 180.0;
-                    float x = 0.2 * cos(theta);
-                    float y = -0.3 + 0.1 * sin(theta);
-                    if (x < 0) {
-                        y += 0.1;
-                    }
-                    glVertex2f(x, y);
-                }
+                glVertex2f(-0.2, -0.2);
+                glVertex2f(0.2, -0.2);
+                glVertex2f(0.2, -0.3);
+                glVertex2f(-0.2, -0.3);
             glEnd();
             break;
         case 5:
-            // Desenho da boca tipo 5 (curva para baixo)
-            glColor3ub(255, 0, 255); // Cor magenta
-            glBegin(GL_LINE_STRIP);
-                glVertex2f(-0.2, -0.4);
-                glVertex2f(-0.1, -0.3);
-                glVertex2f(0.0, -0.4);
-                glVertex2f(0.1, -0.3);
-                glVertex2f(0.2, -0.4);
+            // Desenho da boca tipo 5 (linha horizontal)
+            glColor3ub(255, 0, 0); // Cor vermelha
+            glBegin(GL_LINES);
+                glVertex2f(-0.2, -0.25);
+                glVertex2f(0.2, -0.25);
             glEnd();
             break;
         case 6:
-            // Desenho da boca tipo 6 (forma de degrau)
-            glColor3ub(0, 255, 255); // Cor ciano
-            glBegin(GL_LINE_STRIP);
-                glVertex2f(-0.2, -0.4);
-                glVertex2f(-0.2, -0.3);
-                glVertex2f(-0.1, -0.3);
-                glVertex2f(-0.1, -0.4);
-                glVertex2f(0.0, -0.4);
+            // Desenho da boca tipo 6 (linha vertical)
+            glColor3ub(255, 0, 0); // Cor vermelha
+            glBegin(GL_LINES);
+                glVertex2f(0.0, -0.2);
                 glVertex2f(0.0, -0.3);
-                glVertex2f(0.1, -0.3);
-                glVertex2f(0.1, -0.4);
-                glVertex2f(0.2, -0.4);
             glEnd();
             break;
         }
@@ -811,7 +779,6 @@ void changeNose(int noseShape) {
 }
 
 void clear_and_redraw(int newContour, int newHair, int newEyes, int newMouth, int newBrows, int newNose) {
-    printf(">>> Alterando olhos para o tipo %d\n", newEyes);
     faceContour = newContour;
     hairStyle = newHair;
     eyeShape = newEyes;
