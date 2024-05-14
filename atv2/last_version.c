@@ -286,25 +286,54 @@ void drawCurlyHair(float yOffset) {
 
 void drawWavyHair(float yOffset) {
     glColor3ub(0, 0, 0); // Cor preta
+
     glBegin(GL_LINE_STRIP);
-    for (float x = -0.4; x <= 0.4; x += 0.05) {
-        float y = yOffset - 0.05 + 0.025 * sin(4 * 3.14159265359 * x);
+
+    // Definir parâmetros para controlar o cabelo ondulado
+    float amplitude = 0.1;
+    float frequency = 2.0;
+    int numSegments = 50;
+
+    // Desenhar cabelo ondulado usando curvas curvas controladas por pontos
+    for (int i = 0; i <= numSegments; ++i) {
+        float t = i / (float)numSegments;
+        float x = -0.4 + t * 0.8;
+        float y = yOffset + amplitude * sin(frequency * 2 * M_PI * t);
+
+        // Adicionar vértice à curva
         glVertex2f(x, y);
     }
+
     glEnd();
 }
 
 
 void drawPonytailHair(float yOffset) {
     glColor3ub(0, 0, 0); // Cor preta
-    glBegin(GL_TRIANGLES);
-    glVertex2f(-0.2, yOffset - 0.1);
-    glVertex2f(-0.2, yOffset - 0.4);
-    glVertex2f(-0.4, yOffset - 0.4);
 
-    glVertex2f(0.2, yOffset - 0.1);
-    glVertex2f(0.2, yOffset - 0.4);
-    glVertex2f(0.4, yOffset - 0.4);
+    // Desenhar a cauda de cavalo usando curvas Bézier quadráticas
+    glBegin(GL_QUAD_STRIP);
+
+    // Definir pontos de controle para curvas Bézier quadráticas
+    float x0 = -0.2, y0 = yOffset;       // Ponto inicial (esquerdo)
+    float x1 = -0.1, y1 = yOffset - 0.2; // Ponto intermediário (esquerdo-central)
+    float x2 = 0.0, y2 = yOffset - 0.4;  // Ponto final (central)
+    float x3 = 0.1, y3 = yOffset - 0.2;  // Ponto intermediário (direito-central)
+    float x4 = 0.2, y4 = yOffset;        // Ponto final (direito)
+
+    // Desenhar curvas Bézier quadráticas usando GL_QUAD_STRIP
+    for (int i = 0; i <= 10; ++i) {
+        float t = i / 10.0;
+
+        // Calcular as coordenadas dos pontos ao longo da curva Bézier quadrática
+        float bx = (1 - t) * ((1 - t) * ((1 - t) * x0 + t * x1) + t * ((1 - t) * x1 + t * x2)) + t * ((1 - t) * ((1 - t) * x1 + t * x2) + t * ((1 - t) * x2 + t * x3));
+        float by = (1 - t) * ((1 - t) * ((1 - t) * y0 + t * y1) + t * ((1 - t) * y1 + t * y2)) + t * ((1 - t) * ((1 - t) * y1 + t * y2) + t * ((1 - t) * y2 + t * y3));
+
+        // Desenhar a curva Bézier quadrática como uma sequência de pontos
+        glVertex2f(bx, by);
+        glVertex2f(bx, by - 0.1); // Ajustar a largura da cauda de cavalo
+    }
+
     glEnd();
 }
 
@@ -328,9 +357,9 @@ void drawSpikyHair(float yOffset) {
 void drawBangsHair(float yOffset) {
     glColor3ub(0, 0, 0); // Cor preta
     glBegin(GL_TRIANGLES);
-    glVertex2f(-0.2, yOffset - 0.1);
-    glVertex2f(0.2, yOffset - 0.1);
-    glVertex2f(0.0, yOffset - 0.4);
+    glVertex2f(-0.1, yOffset - 0.05); // Ponto esquerdo
+    glVertex2f(0.1, yOffset - 0.05);  // Ponto direito
+    glVertex2f(0.0, yOffset - 0.2);   // Ponto superior
     glEnd();
 }
 
@@ -350,7 +379,7 @@ void changeHair(int hairstyle) {
             break;
         case 4:
             // Cabelo tipo 4: Rabo de cavalo
-            drawPonytailHair(0.4);
+            drawPonytailHair(0.5);
             break;
         case 5:
             // Cabelo tipo 5: Cabelo espetado
