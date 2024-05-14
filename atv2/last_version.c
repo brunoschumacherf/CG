@@ -161,7 +161,7 @@ void drawText(const char *string) {
     glColor3ub(0, 0, 0); // Black color
     glRasterPos2f(-0.9, 0.8); // Text position
     while (*string) {
-        glutBitmapCharacter(GLUT_BITMAP_HELVETICA_12, *string); // Display character by character
+        glutBitmapCharacter(GLUT_BITMAP_HELVETICA_12, *string); 
         string++;
     }
 }
@@ -176,8 +176,8 @@ void changeFaceContour(int contour) {
             glBegin(GL_LINE_LOOP); // Desenha um contorno fechado (polígono)
             for (int i = 0; i < 360; ++i) {
                 float theta = i * 3.14159265359 / 180.0;
-                float x = 0.4 * cos(theta); // Aumenta o raio para uma cabeça maior
-                float y = 0.4 * sin(theta); // Aumenta o raio para uma cabeça maior
+                float x = 0.4 * cos(theta);
+                float y = 0.4 * sin(theta);
                 glVertex2f(x, y);
             }
             glEnd();
@@ -188,8 +188,8 @@ void changeFaceContour(int contour) {
             glBegin(GL_LINE_LOOP); // Desenha um contorno fechado (polígono)
             for (int i = 0; i < 360; ++i) {
                 float theta = i * 3.14159265359 / 180.0;
-                float x = 0.4 * cos(theta); // Aumenta o raio para uma cabeça maior
-                float y = 0.4 * sin(theta); // Aumenta o raio para uma cabeça maior
+                float x = 0.4 * cos(theta);
+                float y = 0.4 * sin(theta);
                 if (i < 90 || (i > 180 && i < 270)) {
                     x += 0.1;
                 } else {
@@ -203,43 +203,43 @@ void changeFaceContour(int contour) {
             // Contorno facial tipo 3: Quadrado
             glLineWidth(2.0); // Define a largura da linha
             glBegin(GL_LINE_LOOP); // Desenha um contorno fechado (polígono)
-            glVertex2f(-0.4, -0.4); // Ajuste para encaixar com o cabelo
-            glVertex2f(0.4, -0.4);  // Ajuste para encaixar com o cabelo
-            glVertex2f(0.4, 0.4);   // Ajuste para encaixar com o cabelo
-            glVertex2f(-0.4, 0.4);  // Ajuste para encaixar com o cabelo
+            glVertex2f(-0.4, -0.4);
+            glVertex2f(0.4, -0.4); 
+            glVertex2f(0.4, 0.4);  
+            glVertex2f(-0.4, 0.4); 
             glEnd();
             break;
         case 4:
             // Contorno facial tipo 4: hexágono
             glLineWidth(2.0); // Define a largura da linha
             glBegin(GL_LINE_LOOP); // Desenha um contorno fechado (polígono)
-            glVertex2f(-0.4, 0.0);  // Ajuste para encaixar com o cabelo
-            glVertex2f(-0.2, -0.4); // Ajuste para encaixar com o cabelo
-            glVertex2f(0.2, -0.4);  // Ajuste para encaixar com o cabelo
-            glVertex2f(0.4, 0.0);   // Ajuste para encaixar com o cabelo
-            glVertex2f(0.2, 0.4);   // Ajuste para encaixar com o cabelo
-            glVertex2f(-0.2, 0.4);  // Ajuste para encaixar com o cabelo
+            glVertex2f(-0.4, 0.0); 
+            glVertex2f(-0.2, -0.4);
+            glVertex2f(0.2, -0.4); 
+            glVertex2f(0.4, 0.0);  
+            glVertex2f(0.2, 0.4);  
+            glVertex2f(-0.2, 0.4); 
             glEnd();
             break;
         case 5:
             // Contorno facial tipo 5: Coração
             glLineWidth(2.0); // Define a largura da linha
             glBegin(GL_LINE_LOOP); // Desenha um contorno fechado (polígono)
-            glVertex2f(0.0, 0.4);   // Ajuste para encaixar com o cabelo
-            glVertex2f(-0.4, 0.0);  // Ajuste para encaixar com o cabelo
-            glVertex2f(-0.2, -0.4); // Ajuste para encaixar com o cabelo
-            glVertex2f(0.2, -0.4);  // Ajuste para encaixar com o cabelo
-            glVertex2f(0.4, 0.0);    // Ajuste para encaixar com o cabelo
+            glVertex2f(0.0, 0.4);  
+            glVertex2f(-0.4, 0.0); 
+            glVertex2f(-0.2, -0.4);
+            glVertex2f(0.2, -0.4); 
+            glVertex2f(0.4, 0.0);   
             glEnd();
             break;
         case 6:
             // Contorno facial tipo 6: Losango
             glLineWidth(2.0); // Define a largura da linha
             glBegin(GL_LINE_LOOP); // Desenha um contorno fechado (polígono)
-            glVertex2f(0.0, 0.4);  // Ajuste para encaixar com o cabelo
-            glVertex2f(-0.4, 0.0); // Ajuste para encaixar com o cabelo
-            glVertex2f(0.0, -0.4);  // Ajuste para encaixar com o cabelo
-            glVertex2f(0.4, 0.0);   // Ajuste para encaixar com o cabelo
+            glVertex2f(0.0, 0.4); 
+            glVertex2f(-0.4, 0.0);
+            glVertex2f(0.0, -0.4); 
+            glVertex2f(0.4, 0.0);  
             glEnd();
             break;
     }
@@ -248,11 +248,16 @@ void changeFaceContour(int contour) {
 
 void drawTexturedHair(float yOffset) {
     glColor3ub(0, 0, 0); // Cor preta
-    glBegin(GL_LINES);
-    for (float x = -0.35; x <= 0.35; x += 0.1) {
-        glVertex2f(x, yOffset);     // Linha vertical para representar o cabelo
-        glVertex2f(x, yOffset - 0.1); // Tamanho e espaçamento ajustáveis
-    }
+    glBegin(GL_POLYGON);
+    glVertex2f(-0.4, yOffset - 0.1);
+    glVertex2f(-0.3, yOffset + 0.1);
+    glVertex2f(-0.2, yOffset - 0.1);
+    glVertex2f(-0.1, yOffset + 0.1);
+    glVertex2f(0.0, yOffset - 0.1);
+    glVertex2f(0.1, yOffset + 0.1);
+    glVertex2f(0.2, yOffset - 0.1);
+    glVertex2f(0.3, yOffset + 0.1);
+    glVertex2f(0.4, yOffset - 0.1);
     glEnd();
 }
 
@@ -366,7 +371,7 @@ void drawBangsHair(float yOffset) {
 void changeHair(int hairstyle) {
     switch (hairstyle) {
         case 1:
-            // Cabelo tipo 1: Cabelo liso
+            // Cabelo tipo 1: Cabelo texturizado
             drawTexturedHair(0.4);
             break;
         case 2:
@@ -403,16 +408,16 @@ void changeEyes(int eyeShape) {
             glBegin(GL_POLYGON);
                 for (int i = 0; i < 360; ++i) {
                     float theta = i * 3.14159265359 / 180.0;
-                    float x = -0.2 + 0.05 * cos(theta); // Raio menor para um olho menor
-                    float y = 0.05 * sin(theta);       // Raio menor para um olho menor
+                    float x = -0.2 + 0.05 * cos(theta); 
+                    float y = 0.05 * sin(theta);       
                     glVertex2f(x, y);
                 }
             glEnd();
             glBegin(GL_POLYGON);
                 for (int i = 0; i < 360; ++i) {
                     float theta = i * 3.14159265359 / 180.0;
-                    float x = 0.2 + 0.05 * cos(theta); // Raio menor para um olho menor
-                    float y = 0.05 * sin(theta);       // Raio menor para um olho menor
+                    float x = 0.2 + 0.05 * cos(theta); 
+                    float y = 0.05 * sin(theta);       
                     glVertex2f(x, y);
                 }
             glEnd();
@@ -423,16 +428,16 @@ void changeEyes(int eyeShape) {
             glBegin(GL_POLYGON);
                 for (int i = 0; i < 360; ++i) {
                     float theta = i * 3.14159265359 / 180.0;
-                    float x = -0.2 + 0.05 * cos(theta); // Raio menor para um olho menor
-                    float y = 0.05 * sin(theta);       // Raio menor para um olho menor
+                    float x = -0.2 + 0.05 * cos(theta); 
+                    float y = 0.05 * sin(theta);       
                     glVertex2f(x, y);
                 }
             glEnd();
             glBegin(GL_POLYGON);
                 for (int i = 0; i < 360; ++i) {
                     float theta = i * 3.14159265359 / 180.0;
-                    float x = 0.2 + 0.05 * cos(theta); // Raio menor para um olho menor
-                    float y = 0.05 * sin(theta);       // Raio menor para um olho menor
+                    float x = 0.2 + 0.05 * cos(theta); 
+                    float y = 0.05 * sin(theta);       
                     glVertex2f(x, y);
                 }
             glEnd();
@@ -440,16 +445,16 @@ void changeEyes(int eyeShape) {
             glBegin(GL_POLYGON);
                 for (int i = 0; i < 360; ++i) {
                     float theta = i * 3.14159265359 / 180.0;
-                    float x = -0.2 + 0.02 * cos(theta); // Raio menor para um olho menor
-                    float y = 0.05 * sin(theta);       // Raio menor para um olho menor
+                    float x = -0.2 + 0.02 * cos(theta); 
+                    float y = 0.05 * sin(theta);       
                     glVertex2f(x, y);
                 }
             glEnd();
             glBegin(GL_POLYGON);
                 for (int i = 0; i < 360; ++i) {
                     float theta = i * 3.14159265359 / 180.0;
-                    float x = 0.2 + 0.02 * cos(theta); // Raio menor para um olho menor
-                    float y = 0.05 * sin(theta);       // Raio menor para um olho menor
+                    float x = 0.2 + 0.02 * cos(theta); 
+                    float y = 0.05 * sin(theta);       
                     glVertex2f(x, y);
                 }
             glEnd();
@@ -459,33 +464,59 @@ void changeEyes(int eyeShape) {
             glColor3ub(0, 0, 0); // Cor preta
             glLineWidth(3.0); // Largura da linha
             glBegin(GL_LINES);
-                glVertex2f(-0.25, 0.1); // Ajuste para olhos menores
-                glVertex2f(-0.15, -0.1); // Ajuste para olhos menores
-                glVertex2f(0.15, 0.1); // Ajuste para olhos menores
-                glVertex2f(0.25, -0.1); // Ajuste para olhos menores
+                glVertex2f(-0.25, 0.1); 
+                glVertex2f(-0.15, -0.1); 
+                glVertex2f(0.15, 0.1); 
+                glVertex2f(0.25, -0.1); 
             glEnd();
             break;
         case 4:
             // Olhos tipo 4: Triângulos
             glColor3ub(0, 0, 0); // Cor preta
             glBegin(GL_TRIANGLES);
-                glVertex2f(-0.25, 0.1); // Ajuste para olhos menores
-                glVertex2f(-0.15, 0.1); // Ajuste para olhos menores
-                glVertex2f(-0.2, -0.1); // Ajuste para olhos menores
-                glVertex2f(0.15, 0.1); // Ajuste para olhos menores
-                glVertex2f(0.25, 0.1); // Ajuste para olhos menores
-                glVertex2f(0.2, -0.1); // Ajuste para olhos menores
+                glVertex2f(-0.25, 0.1); 
+                glVertex2f(-0.15, 0.1); 
+                glVertex2f(-0.2, -0.1); 
+                glVertex2f(0.15, 0.1); 
+                glVertex2f(0.25, 0.1); 
+                glVertex2f(0.2, -0.1); 
             glEnd();
             break;
         case 5:
-            // Olhos tipo 5: Linhas horizontais
+            // Olhos tipo 5: Círculos com "pupila azul"
             glColor3ub(0, 0, 0); // Cor preta
-            glLineWidth(3.0); // Largura da linha
-            glBegin(GL_LINES);
-                glVertex2f(-0.25, 0.1); // Ajuste para olhos menores
-                glVertex2f(-0.15, 0.1); // Ajuste para olhos menores
-                glVertex2f(0.15, 0.1); // Ajuste para olhos menores
-                glVertex2f(0.25, 0.1); // Ajuste para olhos menores
+            glBegin(GL_POLYGON);
+                for (int i = 0; i < 360; ++i) {
+                    float theta = i * 3.14159265359 / 180.0;
+                    float x = -0.2 + 0.05 * cos(theta); 
+                    float y = 0.05 * sin(theta);       
+                    glVertex2f(x, y);
+                }
+            glEnd();
+            glBegin(GL_POLYGON);
+                for (int i = 0; i < 360; ++i) {
+                    float theta = i * 3.14159265359 / 180.0;
+                    float x = 0.2 + 0.05 * cos(theta); 
+                    float y = 0.05 * sin(theta);       
+                    glVertex2f(x, y);
+                }
+            glEnd();
+            glColor3ub(0, 0, 255); // Cor azul
+            glBegin(GL_POLYGON);
+                for (int i = 0; i < 360; ++i) {
+                    float theta = i * 3.14159265359 / 180.0;
+                    float x = -0.2 + 0.02 * cos(theta); 
+                    float y = 0.05 * sin(theta);       
+                    glVertex2f(x, y);
+                }
+            glEnd();
+            glBegin(GL_POLYGON);
+                for (int i = 0; i < 360; ++i) {
+                    float theta = i * 3.14159265359 / 180.0;
+                    float x = 0.2 + 0.02 * cos(theta); 
+                    float y = 0.05 * sin(theta);       
+                    glVertex2f(x, y);
+                }
             glEnd();
             break;
         case 6:
@@ -493,10 +524,10 @@ void changeEyes(int eyeShape) {
             glColor3ub(0, 0, 0); // Cor preta
             glLineWidth(3.0); // Largura da linha
             glBegin(GL_LINES);
-                glVertex2f(-0.2, 0.1); // Ajuste para olhos menores
-                glVertex2f(-0.2, -0.1); // Ajuste para olhos menores
-                glVertex2f(0.2, 0.1); // Ajuste para olhos menores
-                glVertex2f(0.2, -0.1); // Ajuste para olhos menores
+                glVertex2f(-0.2, 0.1); 
+                glVertex2f(-0.2, -0.1); 
+                glVertex2f(0.2, 0.1); 
+                glVertex2f(0.2, -0.1); 
             glEnd();
             break;
     }
@@ -509,53 +540,136 @@ void changeMouth(int mouthShape) {
             // Desenho da boca tipo 1 (linha reta)
             glColor3ub(255, 0, 0); // Cor vermelha
             glBegin(GL_LINES);
-                glVertex2f(-0.15, -0.15); // Posição um pouco mais acima
-                glVertex2f(0.15, -0.15);  // Posição um pouco mais acima
+                glVertex2f(-0.15, -0.15); 
+                glVertex2f(0.15, -0.15);  
             glEnd();
             break;
         case 2:
             // Desenho da boca tipo 2 (linha curva)
             glColor3ub(255, 0, 0); // Cor vermelha
             glBegin(GL_LINE_STRIP);
-                glVertex2f(-0.15, -0.15); // Posição um pouco mais acima
+                glVertex2f(-0.15, -0.15); 
                 glVertex2f(-0.1, -0.2);
                 glVertex2f(0.1, -0.2);
-                glVertex2f(0.15, -0.15);  // Posição um pouco mais acima
+                glVertex2f(0.15, -0.15);  
             glEnd();
             break;
         case 3:
             // Desenho da boca tipo 3 (triângulo)
             glColor3ub(255, 0, 0); // Cor vermelha
             glBegin(GL_TRIANGLES);
-                glVertex2f(-0.15, -0.15); // Posição um pouco mais acima
-                glVertex2f(0.15, -0.15);  // Posição um pouco mais acima
-                glVertex2f(0.0, -0.2);    // Posição um pouco mais acima
+                glVertex2f(-0.15, -0.15); 
+                glVertex2f(0.15, -0.15);  
+                glVertex2f(0.0, -0.2);    
             glEnd();
             break;
         case 4:
             // Desenho da boca tipo 4 (retângulo)
             glColor3ub(255, 0, 0); // Cor vermelha
             glBegin(GL_POLYGON);
-                glVertex2f(-0.15, -0.15); // Posição um pouco mais acima
-                glVertex2f(0.15, -0.15);  // Posição um pouco mais acima
-                glVertex2f(0.15, -0.2);   // Posição um pouco mais acima
-                glVertex2f(-0.15, -0.2);  // Posição um pouco mais acima
+                glVertex2f(-0.15, -0.15); 
+                glVertex2f(0.15, -0.15);  
+                glVertex2f(0.15, -0.2);   
+                glVertex2f(-0.15, -0.2);  
             glEnd();
             break;
         case 5:
             // Desenho da boca tipo 5 (linha horizontal)
             glColor3ub(255, 0, 0); // Cor vermelha
             glBegin(GL_LINES);
-                glVertex2f(-0.15, -0.175); // Posição um pouco mais acima
-                glVertex2f(0.15, -0.175);  // Posição um pouco mais acima
+                glVertex2f(-0.15, -0.175); 
+                glVertex2f(0.15, -0.175);  
             glEnd();
             break;
         case 6:
-            // Desenho da boca tipo 6 (linha vertical)
+            // Desenho da boca tipo 6 com dentes (retângulo com linhas horizontais)
+            glColor3ub(255, 0, 0); // Cor vermelha
+            glBegin(GL_POLYGON);
+                glVertex2f(-0.15, -0.15); 
+                glVertex2f(0.15, -0.15);  
+                glVertex2f(0.15, -0.2);   
+                glVertex2f(-0.15, -0.2);  
+            glEnd();
+            glColor3ub(255, 255, 255); // Cor branca
+            glBegin(GL_LINES);
+                glVertex2f(-0.15, -0.175); 
+                glVertex2f(0.15, -0.175);  
+            glEnd();
+            break;
+        default:
+            break;
+    }
+}
+
+void changeEyebrows(int browShape) {
+    glColor3ub(0, 0, 0); // Cor preta para as sobrancelhas
+
+    switch (browShape) {
+        case 1:
+            // Sobrancelhas tipo 1: Linhas horizontais simples
+            glBegin(GL_LINES);
+                glVertex2f(-0.25, 0.12); 
+                glVertex2f(-0.05, 0.12);
+                glVertex2f(0.05, 0.12);
+                glVertex2f(0.25, 0.12);
+            glEnd();
+            break;
+        case 2:
+            // Sobrancelhas tipo 2: Linhas diagonais
+            glBegin(GL_LINES);
+                glVertex2f(-0.25, 0.16); 
+                glVertex2f(-0.05, 0.21);
+                glVertex2f(0.05, 0.21);
+                glVertex2f(0.25, 0.16);
+            glEnd();
+            break;
+        case 3:
+            // Sobrancelhas tipo 3: Curvas suaves
+            glBegin(GL_LINE_STRIP);
+                glVertex2f(-0.25, 0.12); 
+                glVertex2f(-0.15, 0.18);
+                glVertex2f(0.0, 0.21);
+                glVertex2f(0.15, 0.18);
+                glVertex2f(0.25, 0.12);
+            glEnd();
+            break;
+        case 4:
+            // Sobrancelhas tipo 4: Curvas com "pico"
+            glBegin(GL_LINE_STRIP);
+                glVertex2f(-0.25, 0.12); 
+                glVertex2f(-0.15, 0.18);
+                glVertex2f(0.0, 0.21);
+                glVertex2f(0.15, 0.18);
+                glVertex2f(0.25, 0.12);
+            glEnd();
+            break;
+        case 5:
+            // Sobrancelhas tipo 5: Zigzag
+            glBegin(GL_LINE_STRIP);
+                glVertex2f(-0.25, 0.12); 
+                glVertex2f(-0.15, 0.18);
+                glVertex2f(-0.05, 0.12);
+                glVertex2f(0.05, 0.18);
+                glVertex2f(0.15, 0.12);
+                glVertex2f(0.25, 0.18);
+            glEnd();
+            break;
+        case 6:
+            // Sobrancelhas tipo 6: cabelinhos individuais vermelhos
             glColor3ub(255, 0, 0); // Cor vermelha
             glBegin(GL_LINES);
-                glVertex2f(0.0, -0.15);
-                glVertex2f(0.0, -0.2); // Posição um pouco mais acima
+                glVertex2f(-0.25, 0.12); 
+                glVertex2f(-0.2, 0.15);
+                glVertex2f(-0.15, 0.12); 
+                glVertex2f(-0.1, 0.15);
+                glVertex2f(-0.05, 0.12); 
+                glVertex2f(0.0, 0.15);
+                glVertex2f(0.05, 0.12); 
+                glVertex2f(0.1, 0.15);
+                glVertex2f(0.15, 0.12); 
+                glVertex2f(0.2, 0.15);
+                glVertex2f(0.25, 0.12); 
+                glVertex2f(0.3, 0.15);
             glEnd();
             break;
         default:
@@ -564,119 +678,34 @@ void changeMouth(int mouthShape) {
 }
 
 
-
-void changeEyebrows(int browShape) {
-    switch (browShape) {
-        case 1:
-            // Sobrancelhas tipo 1: Linhas horizontais
-            glColor3ub(0, 0, 0); // Cor preta
-            glBegin(GL_LINES);
-                glVertex2f(-0.3, 0.15); // Mais próximo dos olhos
-                glVertex2f(-0.1, 0.15);
-                glVertex2f(0.1, 0.15);
-                glVertex2f(0.3, 0.15);
-            glEnd();
-            break;
-        case 2:
-            // Sobrancelhas tipo 2: Linhas diagonais
-            glColor3ub(0, 0, 0); // Cor preta
-            glLineWidth(2.0);   // Largura da linha
-            glBegin(GL_LINES);
-                glVertex2f(-0.3, 0.19); // Mais próximo dos olhos
-                glVertex2f(-0.1, 0.24);
-                glVertex2f(0.1, 0.24);
-                glVertex2f(0.3, 0.19);
-            glEnd();
-            break;
-        case 3:
-            // Sobrancelhas tipo 3: Curvas suaves
-            glColor3ub(0, 0, 0); // Cor preta
-            glLineWidth(2.0);   // Largura da linha
-            glBegin(GL_LINE_STRIP);
-                glVertex2f(-0.3, 0.15); // Mais próximo dos olhos
-                glVertex2f(-0.2, 0.21);
-                glVertex2f(0.0, 0.24);
-                glVertex2f(0.2, 0.21);
-                glVertex2f(0.3, 0.15);
-            glEnd();
-            break;
-        case 4:
-            // Sobrancelhas tipo 4: Linhas verticais com espessura variável
-            glColor3ub(0, 0, 0); // Cor preta
-            glLineWidth(3.0);   // Largura da linha
-            glBegin(GL_LINES);
-                glVertex2f(-0.3, 0.15); // Mais próximo dos olhos
-                glVertex2f(-0.3, 0.22);
-                glVertex2f(-0.15, 0.22);
-                glVertex2f(-0.15, 0.15);
-                glVertex2f(0.0, 0.22);
-                glVertex2f(0.0, 0.15);
-                glVertex2f(0.15, 0.22);
-                glVertex2f(0.15, 0.15);
-                glVertex2f(0.3, 0.22);
-                glVertex2f(0.3, 0.15);
-            glEnd();
-            break;
-        case 5:
-            // Sobrancelhas tipo 5: Zigzag
-            glColor3ub(0, 0, 0); // Cor preta
-            glLineWidth(2.0);   // Largura da linha
-            glBegin(GL_LINE_STRIP);
-                glVertex2f(-0.3, 0.15); // Mais próximo dos olhos
-                glVertex2f(-0.2, 0.21);
-                glVertex2f(-0.1, 0.15);
-                glVertex2f(0.0, 0.21);
-                glVertex2f(0.1, 0.15);
-                glVertex2f(0.2, 0.21);
-                glVertex2f(0.3, 0.15);
-            glEnd();
-            break;
-        case 6:
-            // Sobrancelhas tipo 6: Linhas horizontais e verticais com espessura variável
-            glColor3ub(0, 0, 0); // Cor preta
-            glLineWidth(3.0);   // Largura da linha
-            glBegin(GL_LINES);
-                glVertex2f(-0.3, 0.15); // Mais próximo dos olhos
-                glVertex2f(-0.1, 0.15);
-                glVertex2f(-0.1, 0.22);
-                glVertex2f(-0.3, 0.22);
-                glVertex2f(0.1, 0.15);
-                glVertex2f(0.3, 0.15);
-                glVertex2f(0.3, 0.22);
-                glVertex2f(0.1, 0.22);
-            glEnd();
-            break;
-    }
-}
-
 void changeNose(int noseShape) {
     switch (noseShape) {
         case 1:
             // Nariz tipo 1: Triângulo
             glColor3ub(255, 0, 0); // Cor vermelha
             glBegin(GL_TRIANGLES);
-                glVertex2f(-0.05, 0.0); // Ajuste para um nariz menor
-                glVertex2f(0.05, 0.0);  // Ajuste para um nariz menor
-                glVertex2f(0.0, -0.1);   // Ajuste para um nariz menor
+                glVertex2f(-0.05, 0.0); 
+                glVertex2f(0.05, 0.0);  
+                glVertex2f(0.0, -0.1);   
             glEnd();
             break;
         case 2:
-            // Nariz tipo 2: Linha vertical
+            // Nariz tipo 2: realista
             glColor3ub(255, 0, 0); // Cor vermelha
-            glLineWidth(2.0); // Largura da linha
-            glBegin(GL_LINES);
-                glVertex2f(0.0, 0.0);
-                glVertex2f(0.0, -0.1); // Ajuste para um nariz menor
+            glBegin(GL_POLYGON);
+                glVertex2f(-0.05, 0.0); 
+                glVertex2f(0.05, 0.0);  
+                glVertex2f(0.0, -0.1);   
             glEnd();
             break;
         case 3:
             // Nariz tipo 3: Retângulo
             glColor3ub(255, 0, 0); // Cor vermelha
             glBegin(GL_POLYGON);
-                glVertex2f(-0.05, 0.0); // Ajuste para um nariz menor
-                glVertex2f(0.05, 0.0);  // Ajuste para um nariz menor
-                glVertex2f(0.05, -0.1);  // Ajuste para um nariz menor
-                glVertex2f(-0.05, -0.1); // Ajuste para um nariz menor
+                glVertex2f(-0.05, 0.0); 
+                glVertex2f(0.05, 0.0);  
+                glVertex2f(0.05, -0.1);  
+                glVertex2f(-0.05, -0.1); 
             glEnd();
             break;
         case 4:
@@ -684,9 +713,9 @@ void changeNose(int noseShape) {
             glColor3ub(255, 0, 0); // Cor vermelha
             glBegin(GL_POLYGON);
                 glVertex2f(0.0, 0.0);
-                glVertex2f(-0.05, -0.05); // Ajuste para um nariz menor
-                glVertex2f(0.0, -0.1);     // Ajuste para um nariz menor
-                glVertex2f(0.05, -0.05);   // Ajuste para um nariz menor
+                glVertex2f(-0.05, -0.05); 
+                glVertex2f(0.0, -0.1);     
+                glVertex2f(0.05, -0.05);   
             glEnd();
             break;
         case 5:
@@ -696,7 +725,7 @@ void changeNose(int noseShape) {
                 for (int i = 0; i < 360; ++i) {
                     float theta = i * 3.14159265359 / 180.0;
                     float x = 0.025 * cos(theta); // Raio menor para um círculo menor
-                    float y = -0.05 + 0.025 * sin(theta); // Ajuste para um nariz menor
+                    float y = -0.05 + 0.025 * sin(theta); 
                     glVertex2f(x, y);
                 }
             glEnd();
@@ -705,8 +734,8 @@ void changeNose(int noseShape) {
             // Nariz tipo 6: Triângulo invertido
             glColor3ub(255, 0, 0); // Cor vermelha
             glBegin(GL_TRIANGLES);
-                glVertex2f(-0.05, -0.1); // Ajuste para um nariz menor
-                glVertex2f(0.05, -0.1);  // Ajuste para um nariz menor
+                glVertex2f(-0.05, -0.1); 
+                glVertex2f(0.05, -0.1);  
                 glVertex2f(0.0, 0.0);
             glEnd();
             break;

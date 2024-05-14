@@ -1,2 +1,2 @@
 sudo apt-get install freeglut3 freeglut3-dev
-gcc -o atv atv.c -lglut -lGLU -lGL -lm
+gcc -o atv last_version.c -lglut -lGLU -lGL -lm
